@@ -96,8 +96,7 @@ export class DashboardComponent implements OnInit {
     } );
   }
 
-  initSocketsOld() {
-
+  initSockets() {
     this.SocketioService.setupSocketConnection();
 
     // SBIN // 779521
@@ -109,7 +108,7 @@ export class DashboardComponent implements OnInit {
       this.socketTickData = data;
       console.log('inside sbi dashboard', this.socketTickData[0].last_price);
       console.log('data', data);
-      this.changePercentNg.nativeElement.InnerHTML = this.socketTickData[0].last_price;
+      // this.changePercentNg.nativeElement.InnerHTML = this.socketTickData[0].last_price;
 
       this.socketTickData.forEach(element => {
         
@@ -125,7 +124,7 @@ export class DashboardComponent implements OnInit {
     } );
   }
 
-  initSockets() {
+  initSocketsFake() {
       this.source.subscribe( (val) => {
         console.log('this.tick[0].last_price', this.tick[0].last_price);
         console.log('this.tick', this.tick);

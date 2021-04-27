@@ -33,10 +33,6 @@ export class SocketioService {
       console.log('tick data', data);
       this.sbi$.next( data );
     } );
-
-    // this.socket.on( 'tick', ( data ) => {
-    //   console.log('tick data', data);
-    // } );
   }
 
   sendMessage(msg: string) {
