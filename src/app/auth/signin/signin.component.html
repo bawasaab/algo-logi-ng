@@ -13,22 +13,22 @@
                 <div class="form_right">
                     <img src="../../../assets/images/logo_2.svg"/>
                     <h1>LOGIN</h1>
-                    <form>
-                        <div class="input_sec input_sec_one">
-                            <label>EMAIL</label>
-                            <input type="text" placeholder="enter here..."/>
+                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                        <div class="input_sec input_sec_one form-group">
+                            <label>EMAIL </label>
+                            <input type="email" placeholder="enter here..." formControlName="email" ngClass="{ 'is-invalid': submitted && f.email.errors }">
                         </div>
 
-                        <div class="input_sec">
+                        <div class="input_sec form-group">
                             <label>PASSWORD</label>
-                            <input type="text" placeholder="enter here..."/>
+                            <input type="password" placeholder="enter here..."  formControlName="password" ngClass="{ 'is-invalid': submitted && f.password.errors }">
                         </div>
 
                         <div class="forget">
                             <a href="#">FORGET?</a>
                         </div>
                         
-                        <a href="dashboard.html">LOGIN <img src="../../../assets/images/login_ico.svg"/></a>
+                        <button type="button" (click)="onSubmit()">LOGIN <img src="../../../assets/images/login_ico.svg"/></button>
                         
                     </form>
                 </div>

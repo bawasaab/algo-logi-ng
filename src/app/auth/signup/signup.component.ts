@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from "ngx-spinner";
 import Swal from 'sweetalert2';
 
+import { AuthService } from "../../services/auth.service";
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -19,24 +21,16 @@ export class SignupComponent implements OnInit {
     private router: Router,
     private spinner: NgxSpinnerService,
     private formBuilder: FormBuilder,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
-    /** spinner starts on init */
-    // this.spinner.show();
-
-    // setTimeout(() => {
-    //   /** spinner ends after 5 seconds */
-    //   this.spinner.hide();
-    // }, 5000);
-
-    // <ngx-spinner></ngx-spinner>
-
     this.signupForm = this.formBuilder.group({
+      first_name: ['', [Validators.required]],
+      last_name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(5)]],
-      // first_name: ['', [Validators.required]],
-      // last_name: ['', [Validators.required]]
+      confirmPassword: ['', [Validators.required, Validators.minLength(5)]],
     });
   }
 
@@ -46,57 +40,59 @@ export class SignupComponent implements OnInit {
 
   // convenience getter for easy access to form fields
   get f() { return this.signupForm.controls; }
-
   
   onSubmit() {
     
     this.submitted = true;
     console.log( 'this.signupForm.invalid', this.signupForm.invalid );
     // stop here if form is invalid
-    // if (this.signupForm.invalid) {
-    //   return;
-    // }
+    if (this.signupForm.invalid) {
+      return;
+    }
 
     let in_data = this.signupForm.value;
     in_data.email = in_data.email.toLowerCase();
+    in_data.role = 'INVESTOR';
     console.log('in_data', in_data);
     
-    /*
-    this.loginService.signup( in_data )
+    this.spinner.show();
+    this.authService.signUp( in_data )
       .subscribe(
         result => {
           this.spinner.hide();
           console.log('result', result);
-          if( result.status == 200 ) {
+          if( result.resCode == 200 ) {
 
-            localStorage.setItem( 'checkoutEmail', result.data.rows.email );
-            localStorage.setItem( 'checkoutUserId', result.data.rows._id );
-
-            Swal.fire(
-              'success',
-              result.msg,
-              result.msg
+            localStorage.setItem('currentUser', JSON.stringify({ 
+              token: result.data.token,
+              user: result.data.user
+            }));
+              Swal.fire(
+                'Success!',
+                'Sign Up successfull',
+                'success'
               );
-            this.router.navigate(['/trailOrCheckout']);
+              this.goToSignIn();
           } else {
+            console.log('inside else');
             Swal.fire(
-              'error',
+              'Error!',
               result.msg,
-              result.msg
+              'error',
             );
           }
         },
         error => {
+          console.log('inside error');
           this.spinner.hide();
           console.log('error');
           console.log(error);
           Swal.fire(
-            'error',
+            'Error!',
             error,
-            error
+            'error',
           );
         }
     );
-    */
   }
 }

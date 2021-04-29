@@ -97,13 +97,6 @@
 		</style>
 	</head>
 	<body>
-		
-		<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-			<input type="email" placeholder="enter here..." formControlName="email">
-			<button type="button" (click)="onSubmit()">Save</button>
-		</form>
-
-
     <!-- router starts -->
     <router-outlet></router-outlet>
 	<ngx-spinner></ngx-spinner>
