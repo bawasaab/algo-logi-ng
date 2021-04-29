@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';            
-import { FormsModule } from '@angular/forms'; 
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,20 +16,27 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { DashboardComponent } from './zerodha/dashboard/dashboard.component';
 
+// Import library module
+import { NgxSpinnerModule } from "ngx-spinner";
+
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent
   ],
   imports: [
-    FormsModule,
-    CommonModule,
-    HttpClientModule,
     BrowserModule,
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
     AppRoutingModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule,
     SocketIoModule.forRoot(config)
   ],
   providers: [SocketioService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }

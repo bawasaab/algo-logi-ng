@@ -5,6 +5,10 @@ const routes: Routes = [
   {
     path: 'zerodha',
     loadChildren: () => import('./zerodha/zerodha-routing.module').then(m => m.ZerodhaRoutingModule)
+  },
+  {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth-routing.module').then( m => m.AuthRoutingModule )
   }
 ];
 

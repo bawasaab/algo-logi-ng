@@ -1,0 +1,41 @@
+<section class="login_banner">
+    <div class="container">
+        <div class="row">
+            
+            <div class="login_left_row">
+                <h6>WELCOME TO ALGO LOGIC</h6>
+                <p>Join our community that have more than 10000 subscribers and learn new things everyday</p>
+                
+                <h5>Already have an account? <a href="javascript:void(0);" (click)="goToSignIn();">Sign In</a></h5>
+            </div>
+            
+            <div class="login_right_row">
+                <div class="form_right">
+                    <img src="../../../assets/images/logo_2.svg"/>
+                    <h1>SIGNUP</h1>
+                    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+                        <div class="input_sec input_sec_one form-group">
+                            <label>EMAIL</label>
+                            <input type="email" placeholder="enter here..." [formControlName]="email">
+                        </div>
+
+                        <div class="input_sec form-group">
+                            <label>PASSWORD</label>
+                            <input type="text" placeholder="enter here..."  [formControlName]="password">
+                        </div>
+
+                        <!-- <div class="input_sec form-group">
+                            <label>CONFIRM PASSWORD</label>
+                            <input type="text" placeholder="enter here..."/>
+                        </div>                       -->
+                        
+                        <a href="javascript:void(0);" (click)="goToSignIn();">SIGNUP <img src="../../../assets/images/login_ico.svg"/></a>
+                        
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <!-- <ngx-spinner></ngx-spinner> -->
+</section>
