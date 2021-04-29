@@ -14,14 +14,17 @@
                     <img src="../../../assets/images/logo_2.svg"/>
                     <h1>SIGNUP</h1>
                     <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+                    <!-- <form (ngSubmit)="onSubmit()"> -->
                         <div class="input_sec input_sec_one form-group">
                             <label>EMAIL</label>
                             <input type="email" placeholder="enter here..." formControlName="email">
+                            <!-- <input type="email" placeholder="enter here..." > -->
                         </div>
 
                         <div class="input_sec form-group">
                             <label>PASSWORD</label>
                             <input type="text" placeholder="enter here..."  formControlName="password">
+                            <!-- <input type="text" placeholder="enter here..."  > -->
                         </div>
 
                         <!-- <div class="input_sec form-group">

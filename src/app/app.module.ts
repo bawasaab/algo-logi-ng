@@ -1,7 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,12 +10,13 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 import { SocketioService } from "./services/socketio.service";
 
-import { HttpClientModule } from '@angular/common/http';
-
 import { DashboardComponent } from './zerodha/dashboard/dashboard.component';
 
 // Import library module
-import { NgxSpinnerModule } from "ngx-spinner";
+// import { NgxSpinnerModule } from "ngx-spinner";
+import { AuthModule } from './auth/auth.module';
+
+import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -26,13 +25,12 @@ import { NgxSpinnerModule } from "ngx-spinner";
   ],
   imports: [
     BrowserModule,
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
+    SharedModule,
+    // HttpClientModule,
     AppRoutingModule,
-    NgxSpinnerModule,
+    // NgxSpinnerModule,
     BrowserAnimationsModule,
+    AuthModule,
     SocketIoModule.forRoot(config)
   ],
   providers: [SocketioService],
