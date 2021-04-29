@@ -35,7 +35,6 @@ export class SignupComponent implements OnInit {
     this.signupForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(5)]],
-      // contact: ['', [Validators.required]],
       // first_name: ['', [Validators.required]],
       // last_name: ['', [Validators.required]]
     });
@@ -52,10 +51,11 @@ export class SignupComponent implements OnInit {
   onSubmit() {
     
     this.submitted = true;
+    console.log( 'this.signupForm.invalid', this.signupForm.invalid );
     // stop here if form is invalid
-    if (this.signupForm.invalid) {
-      return;
-    }
+    // if (this.signupForm.invalid) {
+    //   return;
+    // }
 
     let in_data = this.signupForm.value;
     in_data.email = in_data.email.toLowerCase();

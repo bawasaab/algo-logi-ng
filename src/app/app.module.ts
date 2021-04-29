@@ -27,8 +27,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
   imports: [
     BrowserModule,
     CommonModule,
-    ReactiveFormsModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
     NgxSpinnerModule,

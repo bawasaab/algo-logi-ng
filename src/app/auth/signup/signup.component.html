@@ -16,12 +16,12 @@
                     <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
                         <div class="input_sec input_sec_one form-group">
                             <label>EMAIL</label>
-                            <input type="email" placeholder="enter here..." [formControlName]="email">
+                            <input type="email" placeholder="enter here..." formControlName="email">
                         </div>
 
                         <div class="input_sec form-group">
                             <label>PASSWORD</label>
-                            <input type="text" placeholder="enter here..."  [formControlName]="password">
+                            <input type="text" placeholder="enter here..."  formControlName="password">
                         </div>
 
                         <!-- <div class="input_sec form-group">
@@ -29,7 +29,10 @@
                             <input type="text" placeholder="enter here..."/>
                         </div>                       -->
                         
-                        <a href="javascript:void(0);" (click)="goToSignIn();">SIGNUP <img src="../../../assets/images/login_ico.svg"/></a>
+                        <button type="button" (click)="onSubmit()">
+                            SIGNUP 
+                            <img src="../../../assets/images/login_ico.svg"/>
+                        </button>
                         
                     </form>
                 </div>
