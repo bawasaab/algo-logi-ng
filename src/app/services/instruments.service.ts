@@ -27,8 +27,17 @@ export class InstrumentsService {
 
   addInstrumentToWatchList( instrument_token ):Observable<any>{
 
+    // localStorage.setItem('currentUser', JSON.stringify({ 
+    //   token: result.data.token,
+    //   user: result.data.user
+    // }));
+
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    let user_id = currentUser['user'].id;
+    console.log('user_id', user_id);
+
     let body = new HttpParams()
-    .set('user_id', '1')
+    .set('user_id', user_id)
     .set('instrument_token', instrument_token); 
 
     return this.httpClient.post( 
