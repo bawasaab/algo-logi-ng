@@ -48,4 +48,14 @@ export class AuthService {
         catchError((e:Response)=> throwError(e))
     );
   }
+
+  isEmailExists( email ):Observable<any>{
+    return this.httpClient.get( 
+      `http://localhost:3000/auth/isEmailExists/${email}`
+      )
+      .pipe(
+        map((e:Response)=> e),
+        catchError((e:Response)=> throwError(e))
+    );
+  }
 }

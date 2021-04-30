@@ -27,7 +27,7 @@
 
                         <div class="input_sec input_sec_one form-group">
                             <label>EMAIL </label>
-                            <input type="email" placeholder="enter here..." formControlName="email" ngClass="{ 'is-invalid': submitted && f.email.errors }">
+                            <input type="email" placeholder="enter here..." formControlName="email" ngClass="{ 'is-invalid': submitted && f.email.errors }" (focusout)="isEmailExists($event)">
                         </div>
 
                         <div class="input_sec form-group">
@@ -40,7 +40,7 @@
                             <input type="password" placeholder="enter here..."  formControlName="confirmPassword" ngClass="{ 'is-invalid': submitted && f.confirmPassword.errors }">
                         </div>
                         
-                        <button type="button" (click)="onSubmit()">
+                        <button type="button" (click)="onSubmit()" *ngIf="signupEnable">
                             SIGNUP 
                             <img src="../../../assets/images/login_ico.svg"/>
                         </button>

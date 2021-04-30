@@ -16,6 +16,7 @@ export class SignupComponent implements OnInit {
 
   signupForm: FormGroup;
   submitted = false;
+  signupEnable = true;
 
   constructor(
     private router: Router,
@@ -40,6 +41,40 @@ export class SignupComponent implements OnInit {
 
   // convenience getter for easy access to form fields
   get f() { return this.signupForm.controls; }
+
+  isEmailExists( event: any ) {
+    let email = event.target.value;
+    console.log('email', email);
+    if( email ) {
+      this.spinner.show();
+      this.authService.isEmailExists( email ).subscribe( ( result ) => {
+        this.spinner.hide();
+        console.log('result', result);
+        
+        if( result.resCode == 400 ) {
+          this.signupEnable = false;
+          Swal.fire(
+            'Error!',
+            result.msg,
+            'error',
+          );
+        } else {
+          this.signupEnable = true;
+        }
+      },
+      error => {
+        console.log('inside error');
+        this.spinner.hide();
+        console.log('error');
+        console.log(error);
+        Swal.fire(
+          'Error!',
+          error,
+          'error',
+        );
+      });
+    }
+  }
   
   onSubmit() {
     
