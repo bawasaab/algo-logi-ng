@@ -561,13 +561,29 @@
 				<form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
 					<div class="dashboard_left_row_dat" *ngFor="let userWatchList of userWatchListData; let i = index">
 						<!-- <h2><span class="list_head">SBI </span> <span class="list_percentage">{{ socketTickData[0].change.toFixed(2) }}% </span><span class="list_arrow"><i class="fas fa-chevron-up"></i></span>  <span class="list_last_spn">{{ socketTickData[0].last_price }}</span></h2> -->
+
 						<h2>
-							<span class="list_head">{{ userWatchList.tradingsymbol }} </span> 
-							<span class="list_percentage">
+							<span style="color: red;" *ngIf="socketUserWatchListData[userWatchList.instrument_token].negative" class="list_head">{{ userWatchList.tradingsymbol }}</span> 
+							<span *ngIf="!socketUserWatchListData[userWatchList.instrument_token].negative" class="list_head">{{ userWatchList.tradingsymbol }}</span> 
+							
+							<span class="list_percentage" style="color: red;" *ngIf="socketUserWatchListData[userWatchList.instrument_token].negative">
 								<input type="text" class="form-control" placeholder="change" name="change_{{userWatchList.instrument_token}}" required [ngModel]="socketUserWatchListData[userWatchList.instrument_token].change" readonly>%
 							</span>
-							<span class="list_arrow"><i class="fas fa-chevron-up"></i></span>  
-							<span class="list_last_spn">
+
+							<span class="list_percentage" *ngIf="!socketUserWatchListData[userWatchList.instrument_token].negative">
+								<input type="text" class="form-control" placeholder="change" name="change_{{userWatchList.instrument_token}}" required [ngModel]="socketUserWatchListData[userWatchList.instrument_token].change" readonly>%
+							</span>
+							
+							<span class="list_arrow">
+								<i class="fas fa-chevron-down" *ngIf="socketUserWatchListData[userWatchList.instrument_token].negative" style="color: red;"></i>
+								<i class="fas fa-chevron-up" *ngIf="!socketUserWatchListData[userWatchList.instrument_token].negative"></i>
+							</span>
+
+							<span class="list_last_spn" style="color: red;" *ngIf="socketUserWatchListData[userWatchList.instrument_token].negative">
+								<input type="text" class="form-control" placeholder="last_price" name="last_price_{{userWatchList.instrument_token}}" required [ngModel]="socketUserWatchListData[userWatchList.instrument_token].last_price" readonly>
+							</span>
+
+							<span class="list_last_spn" *ngIf="!socketUserWatchListData[userWatchList.instrument_token].negative">
 								<input type="text" class="form-control" placeholder="last_price" name="last_price_{{userWatchList.instrument_token}}" required [ngModel]="socketUserWatchListData[userWatchList.instrument_token].last_price" readonly>
 							</span>
 						</h2>

@@ -3,6 +3,7 @@ import { SocketioService } from "../../services/socketio.service";
 import { InstrumentsService } from "../../services/instruments.service";
 import { $, element } from 'protractor';
 import { NgForm } from '@angular/forms'; 
+import { NgxSpinnerService } from "ngx-spinner";
 
 import { interval } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -37,7 +38,8 @@ export class DashboardComponent implements OnInit {
 
   constructor( 
     private SocketioService : SocketioService,
-    private InstrumentsService : InstrumentsService
+    private InstrumentsService : InstrumentsService,
+    private spinner: NgxSpinnerService
   ) {
     console.log('inside getUserWatchList');
   }
@@ -94,8 +96,10 @@ export class DashboardComponent implements OnInit {
   getUserWatchList() {
 
     let $this = this;
+    this.spinner.show();
     this.InstrumentsService.getUserWatchList().subscribe( ( result ) => {
       console.log('result', result);
+      this.spinner.hide();
       this.userWatchListData = result.data;
 
       this.userWatchListData.forEach( (element) => {
@@ -127,8 +131,9 @@ export class DashboardComponent implements OnInit {
       this.socketTickData.forEach(element => {
         
         this.socketUserWatchListData[element.instrument_token] = {
-          last_price : element.last_price,
-          change : element.change
+          last_price : parseFloat( element.last_price ).toFixed(2),
+          change : parseFloat( element.change ).toFixed(2),
+          negative: element.change >= 0 ? false : true
         };
 
         this.change = element.change;
