@@ -5,6 +5,7 @@ import { $, element } from 'protractor';
 import { NgForm } from '@angular/forms'; 
 
 import { interval } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-dashboard',
@@ -73,7 +74,20 @@ export class DashboardComponent implements OnInit {
     console.log('instrument_token', instrument_token);
     this.InstrumentsService.addInstrumentToWatchList( instrument_token ).subscribe( (result) => {
       console.log('result', result);
-      this.getUserWatchList();
+      if( result.resCode == 200 ) {
+        Swal.fire(
+          'Success!',
+          'Instrument added successfully',
+          'success'
+        );
+        this.getUserWatchList();
+      } else {
+        Swal.fire(
+          'Error!',
+          result.msg,
+          'error',
+        );
+      }
     } );
   }
 

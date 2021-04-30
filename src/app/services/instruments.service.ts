@@ -6,12 +6,18 @@ import { map, catchError } from "rxjs/operators";
 @Injectable({
   providedIn: 'root'
 })
+
 export class InstrumentsService {
 
+  public currentUser;
+  public user_id;
+  
   constructor(
     private httpClient: HttpClient
   ) {
     // this.apiEndPoint = this.constantsService.apiBaseUrl +'/coupon';
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.user_id = this.currentUser['user'].id;
   }
 
   searchInstruments( str ):Observable<any>{
@@ -27,14 +33,8 @@ export class InstrumentsService {
 
   addInstrumentToWatchList( instrument_token ):Observable<any>{
 
-    // localStorage.setItem('currentUser', JSON.stringify({ 
-    //   token: result.data.token,
-    //   user: result.data.user
-    // }));
-
     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    let user_id = currentUser['user'].id;
-    console.log('user_id', user_id);
+    let user_id = this.user_id;
 
     let body = new HttpParams()
     .set('user_id', user_id)
@@ -52,7 +52,7 @@ export class InstrumentsService {
 
   getUserWatchList():Observable<any>{
     return this.httpClient.get( 
-      `http://localhost:3000/zerodha/getUserWatchList`
+      `http://localhost:3000/zerodha/getUserWatchList?user_id=${this.user_id}`
       )
       .pipe(
         map((e:Response)=> e),
