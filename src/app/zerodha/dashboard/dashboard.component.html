@@ -563,8 +563,8 @@
 						<!-- <h2><span class="list_head">SBI </span> <span class="list_percentage">{{ socketTickData[0].change.toFixed(2) }}% </span><span class="list_arrow"><i class="fas fa-chevron-up"></i></span>  <span class="list_last_spn">{{ socketTickData[0].last_price }}</span></h2> -->
 
 						<h2>
-							<span style="color: red;" *ngIf="socketUserWatchListData[userWatchList.instrument_token].negative" class="list_head">{{ userWatchList.tradingsymbol }}</span> 
-							<span *ngIf="!socketUserWatchListData[userWatchList.instrument_token].negative" class="list_head">{{ userWatchList.tradingsymbol }}</span> 
+							<span style="color: red;" *ngIf="socketUserWatchListData[userWatchList.instrument_token].negative" class="list_head"><small>{{ userWatchList.name }} | {{ userWatchList.tradingsymbol }} | {{ userWatchList.exchange }}</small></span> 
+							<span *ngIf="!socketUserWatchListData[userWatchList.instrument_token].negative" class="list_head"><small>{{ userWatchList.name }} | {{ userWatchList.tradingsymbol }} | {{ userWatchList.exchange }}</small></span> 
 							
 							<span class="list_percentage" style="color: red;" *ngIf="socketUserWatchListData[userWatchList.instrument_token].negative">
 								<input type="text" class="form-control" placeholder="change" name="change_{{userWatchList.instrument_token}}" required [ngModel]="socketUserWatchListData[userWatchList.instrument_token].change" readonly>%

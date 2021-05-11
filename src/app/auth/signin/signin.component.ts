@@ -63,6 +63,7 @@ export class SigninComponent implements OnInit {
           console.log('result', result);
           if( result.resCode == 200 ) {
 
+            localStorage.clear();
             localStorage.setItem('currentUser', JSON.stringify({ 
               token: result.data.token,
               user: result.data.user
